@@ -94,8 +94,8 @@
       width: 320px;
       height: auto;
       border-radius: 4px;
-      cursor: pointer;  /* Pour indiquer que l'image est cliquable */
-      transition: transform 0.3s ease;  /* Pour l'effet de transition */
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
     .info {
@@ -120,7 +120,7 @@
 
   <!-- MENU DÉROULANT LATÉRAL -->
   <div class="menu" id="menu">
-    <a href="index.html">Permis de conduire</a>
+    <a href="./index.html">Permis de conduire</a>
     <a href="#">Véhicule</a>
     <a href="#">Mes points</a>
     <a href="./images/assistance.html">Assistance</a>
@@ -145,9 +145,8 @@
   </div>
 
   <script>
-    // Fonction pour changer l'image entre recto et verso
-    let recto = "./images/permis-recto.jpg";
-    let verso = "./images/permis-verso.jpg";
+    const recto = "./images/permis-recto.jpg";
+    const verso = "./images/permis-verso.jpg";
     let imageActuelle = "recto";
 
     function changerImage() {
@@ -161,19 +160,24 @@
       }
     }
 
-    // Fonction pour ouvrir/fermer le menu
     function toggleMenu() {
       const menu = document.getElementById('menu');
       menu.classList.toggle('open');
     }
 
-    // Clic en dehors du menu pour le fermer
     document.addEventListener('click', function(e) {
       const menu = document.getElementById('menu');
       const logo = document.querySelector('.logo-placeholder');
       if (!logo.contains(e.target) && !menu.contains(e.target)) {
         menu.classList.remove('open');
       }
+    });
+
+    // Fermer le menu après clic sur un lien
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('open');
+      });
     });
   </script>
 
