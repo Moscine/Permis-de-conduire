@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assistance</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1100;
+    }
+
+    .logo-placeholder {
+      cursor: pointer;
+    }
+
+    .logo-placeholder img {
+      height: 30px;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 50%;
+      background-color: #ffffff;
+      color: #000;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      padding-top: 80px;
+      overflow-y: auto;
+
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .menu.open {
+      transform: translateX(0);
+    }
+
+    .menu a {
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: #003366;
+      border-bottom: 1px solid #ddd;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #003366;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      color: #333;
+    }
+
+    input,
+    textarea {
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background-color: #fdfdfd;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #003366;
+      box-shadow: 0 0 5px rgba(0, 51, 102, 0.3);
+      outline: none;
+    }
+
+    button {
+      align-self: flex-start;
+      padding: 0.75rem 1.5rem;
+      background-color: #003366;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0055aa;
+    }
+
+    .qr-code {
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+
+    .qr-code h2 {
+      color: #003366;
+      margin-bottom: 1rem;
+    }
+
+    .qr-code img {
+      width: 150px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-placeholder" onclick="toggleMenu()">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Logo_FranceConnect_en_Octobre_2022.svg/800px-Logo_FranceConnect_en_Octobre_2022.svg.png" alt="Logo personnalisé">
+    </div>
+    <div>France Identité</div>
+  </header>
+
+  <div class="menu" id="menu">
+    <a href="index.html">Permis de conduire</a>
+    <a href="#">Véhicule</a>
+    <a href="#">Mes points</a>
+    <a href="assistance.html">Assistance</a>
+    <a href="#">Déconnexion</a>
+  </div>
+
+  <div class="container">
+    <h1>Assistance</h1>
+
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required placeholder="Entrez votre nom">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="Entrez votre email">
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Écrivez votre message ici..."></textarea>
+      </div>
+
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <div class="qr-code">
+      <h2>QR Code d'assistance</h2>
+      <img src="./images/qr-assistance.png" alt="QR Code pour assistance">
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('open');
+    }
+
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('menu');
+      const logo = document.querySelector('.logo-placeholder');
+      if (!logo.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>
