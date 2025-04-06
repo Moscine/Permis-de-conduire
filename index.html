@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Permis numérique</title>
   <style>
     body {
@@ -10,6 +10,7 @@
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
     }
+
     header {
       background-color: #003366;
       color: white;
@@ -17,10 +18,48 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
+
+    .logo-placeholder {
+      cursor: pointer;
+      z-index: 1100;
+    }
+
     .logo-placeholder img {
       height: 30px;
     }
+
+    /* MENU LATÉRAL */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 30%;
+      max-width: 300px;
+      background-color: #ffffff;
+      color: #000;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      padding-top: 80px; /* pour laisser de l'espace sous le header */
+    }
+
+    .menu a {
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: #003366;
+      border-bottom: 1px solid #ddd;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: #f0f0f0;
+    }
+
     .container {
       max-width: 800px;
       margin: 2rem auto;
@@ -29,10 +68,12 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     h1 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
     }
+
     .permis-card {
       display: flex;
       flex-direction: column;
@@ -41,28 +82,42 @@
       background-color: #e6ecf0;
       border-radius: 6px;
     }
+
     .permis-image-placeholder img {
       width: 320px;
       height: auto;
       border-radius: 4px;
     }
+
     .info {
       text-align: left;
       width: 100%;
       max-width: 320px;
     }
+
     .info p {
       margin: 0.5rem 0;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="logo-placeholder">
+    <div class="logo-placeholder" onclick="toggleMenu()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Logo_FranceConnect_en_Octobre_2022.svg/800px-Logo_FranceConnect_en_Octobre_2022.svg.png" alt="Logo personnalisé">
     </div>
     <div>France Identité</div>
   </header>
+
+  <!-- MENU DÉROULANT LATÉRAL -->
+  <div class="menu" id="menu">
+    <a href="#">Véhicule</a>
+    <a href="#">Permis de conduire</a>
+    <a href="#">Mes points</a>
+    <a href="#">Assistance</a>
+    <a href="#">Déconnexion</a>
+  </div>
+
   <div class="container">
     <h1>Permis de conduire numérique</h1>
     <div class="permis-card">
@@ -79,5 +134,21 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    // Fermer si on clique hors menu
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('menu');
+      const logo = document.querySelector('.logo-placeholder');
+      if (!logo.contains(e.target) && !menu.contains(e.target)) {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
