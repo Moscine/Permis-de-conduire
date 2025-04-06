@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Permis numérique</title>
   <style>
     body {
@@ -10,7 +10,6 @@
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
     }
-
     header {
       background-color: #003366;
       color: white;
@@ -18,55 +17,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
-      z-index: 1100;
     }
-
-    .logo-placeholder {
-      cursor: pointer;
-    }
-
     .logo-placeholder img {
       height: 30px;
     }
-
-    /* MENU LATÉRAL ANIMÉ */
-    .menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 50%;
-      background-color: #ffffff;
-      color: #000;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      z-index: 1000;
-      padding-top: 80px;
-      overflow-y: auto;
-
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-    }
-
-    .menu.open {
-      transform: translateX(0);
-    }
-
-    .menu a {
-      padding: 1rem 1.5rem;
-      text-decoration: none;
-      color: #003366;
-      border-bottom: 1px solid #ddd;
-      font-size: 1rem;
-      transition: background-color 0.3s;
-    }
-
-    .menu a:hover {
-      background-color: #f0f0f0;
-    }
-
     .container {
       max-width: 800px;
       margin: 2rem auto;
@@ -75,12 +29,10 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     h1 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
     }
-
     .permis-card {
       display: flex;
       flex-direction: column;
@@ -89,53 +41,41 @@
       background-color: #e6ecf0;
       border-radius: 6px;
     }
-
     .permis-image-placeholder img {
       width: 320px;
       height: auto;
       border-radius: 4px;
+      cursor: pointer;  /* Ajoute un curseur pour indiquer qu'on peut cliquer */
+      transition: transform 0.3s ease;  /* Pour un effet de transition */
     }
-
     .info {
       text-align: left;
       width: 100%;
       max-width: 320px;
     }
-
     .info p {
       margin: 0.5rem 0;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <div class="logo-placeholder" onclick="toggleMenu()">
+    <div class="logo-placeholder">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Logo_FranceConnect_en_Octobre_2022.svg/800px-Logo_FranceConnect_en_Octobre_2022.svg.png" alt="Logo personnalisé">
     </div>
     <div>France Identité</div>
   </header>
-
-  <!-- MENU DÉROULANT LATÉRAL -->
-  <div class="menu" id="menu">
-    <a href="#">Permis de conduire</a>
-    <a href="#">Véhicule</a>
-    <a href="#">Mes points</a>
-    <a href="#">Assistance</a>
-    <a href="#">Déconnexion</a>
-  </div>
-
   <div class="container">
     <h1>Permis de conduire numérique</h1>
     <div class="permis-card">
       <div class="permis-image-placeholder">
-        <img src="./images/permis.jpg" alt="Image du permis">
+        <img id="permisImage" src="./images/permis-recto.png" alt="Image du permis" onclick="changerImage()">
       </div>
       <div class="info">
         <p><strong>Nom :</strong> Hanssaly</p>
-        <p><strong>Prénom :</strong> Moscine Maxime Ernest</p>
+        <p><strong>Prénom :</strong> Moscine</p>
         <p><strong>Date de naissance :</strong> 21/05/1997</p>
-        <p><strong>Numéro de permis :</strong> 536020331011</p>
+        <p><strong>Numéro de permis :</strong> 911091204209</p>
         <p><strong>Catégories :</strong> B</p>
         <p><strong>Points restants :</strong> 9</p>
       </div>
@@ -143,18 +83,22 @@
   </div>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.classList.toggle('open');
-    }
+    // Définit les chemins des deux images
+    let recto = "./images/permis-recto.png";
+    let verso = "./images/permis-verso.png";
+    let imageActuelle = "recto";
 
-    document.addEventListener('click', function(e) {
-      const menu = document.getElementById('menu');
-      const logo = document.querySelector('.logo-placeholder');
-      if (!logo.contains(e.target) && !menu.contains(e.target)) {
-        menu.classList.remove('open');
+    // Fonction pour changer l'image
+    function changerImage() {
+      const img = document.getElementById("permisImage");
+      if (imageActuelle === "recto") {
+        img.src = verso;
+        imageActuelle = "verso";
+      } else {
+        img.src = recto;
+        imageActuelle = "recto";
       }
-    });
+    }
   </script>
 </body>
 </html>
